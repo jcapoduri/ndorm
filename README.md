@@ -44,7 +44,6 @@ the Objects array contains all the object you want to keep inside your system
 	//objects
 	{
 		"name" : "inner_name", //required
-		"tablename": "name insdide table", //optional
 		"nd_fields": false, //optional, include base neodymium fields
 		"fields": [],
 		"inherit": "object_name", //optional, inherit object
@@ -70,23 +69,18 @@ the storage array contains storage engines available to persist
 	//storages
 	{
 		"name": "storage_name",
-		"type": "", // ["database", "local", "external", "mongodb", "api"]
 		"db_host": "",
 		"db_name": "",
 		"db_user": "",
 		"db_pass": "",
 		"db_port": 3061,
-		"db_type": "", //["mysql", "psql", "litesql", "restapi"],
-		"local_folder": "folder_name",
-		"base_uri" : "", //only for api, basic url
-		"map": {} //map between object/relation name and storage map
 	}
 
 the apps
 
 	//apps
 	["name"]: {
-		"storage": [], // storages used by the app
+		"storage": "", // storages used by the app
 		"map": {} //map between object/relation -> storage engine
 	}
 	
@@ -94,5 +88,5 @@ Usage:
 
     $config_data = file_get_contents('config.json');
     $config_json = json_decode($config_data, true);
-    $system = new \nd\neodynium($config_json);
+    $system = new \nd\solution($config_json);
     $system->startApp("app_name");
