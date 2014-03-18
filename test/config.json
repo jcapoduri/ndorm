@@ -15,7 +15,7 @@
             "author": "link:author",
             "title": "string",
             "body": "string 40000",
-            "comments": "list: comments"
+            "comments": "list:comments"
         }
     },
     "storages": {
@@ -26,6 +26,14 @@
             "db_user": "root",
             "db_pass": "",
             "db_port": 3061
+        },
+        "c9": {
+            "db_type": "mysql",
+            "db_host": "127.7.201.1",
+            "db_name": "c9",
+            "db_user": "jcapoduri",
+            "db_pass": "",
+            "db_port": 3306
         }
     }
 }

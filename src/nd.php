@@ -5,39 +5,38 @@ require_once 'orm/modelDefinition.php';
 require_once 'orm/protoObject.php';
 
 class nd {
-	protected $storages = array();
-	protected $entities = array();
-	protected $PDOhandler = null;
+	static protected $storages = array();
+	static protected $PDOhandler = null;
 
 	static public function setup($json) {
 		if (isset($json->objects)) {
 			$objs = $json->objects;
 			foreach ($objs as $name => $value) {
-			 	$this->entities[$name] = new modelDefinition($value);
+			 	\nd\modelDefinition::define($name, $value);
 			};
 		};
 		if (isset($json->storages)) {
 			$sto = $json->storages;
 			foreach ($sto as $name => $value) {
-			 	$this->storages[$name] = new storage($value);
+			 	self::$storages[$name] = new \nd\storage($value);
 			};	
 		};
-		return $this;
 	}
 
 	static public function init($name) {
-		if (isset($this->storages[$name])) {
-			$this->PDOhandler = $this->storages[$name]->connect();
+		if (isset(self::$storages[$name])) {
+			self::$PDOhandler = self::$storages[$name]->connect();
 		}
 	}
     
     /* global operations */
     static public function nuke() {
-
+        if (is_null(self::$PDOhandler)) return false;
+        self::$PDOhandler->exec("SHOW TABLES;");
     }
     
     static public function updateSchema() {
-
+        
     }
 
     static public function commit() {
@@ -47,6 +46,7 @@ class nd {
     static public function setAutocommit($value) { $this->autocommit = $value; }
     
     /* orm statemens*/
+    static public function define($name, $json) { return \nd\modelDefinition::define($name, $json); }
     static public function dispense($modelName) {}
     static public function save($objs) {}
     static public function trash($objs) {}

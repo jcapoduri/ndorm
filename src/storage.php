@@ -12,18 +12,24 @@ class storage {
 	protected $db_port = 3061;
     
     public function __construct($json) {
-        $this->db_type = $json["db_type"];
-        $this->db_host = $json["db_host"];
-        $this->db_name = $json["db_name"];
-        $this->db_user = $json["db_user"];
-        $this->db_pass = $json["db_pass"];
-        $this->db_port = isset($json["db_port"]) ? $json["db_port"] : 3061;        
+        $this->db_type = $json->db_type;
+        $this->db_host = $json->db_host;
+        $this->db_name = $json->db_name;
+        $this->db_user = $json->db_user;
+        $this->db_pass = $json->db_pass;
+        $this->db_port = isset($json->db_port) ? $json->db_port : 3061;        
     }
     
     public function connect() {
-        $dns = $this->db_type . ":dbname=" . $this->db_name.";host=".$this->host;
-        $this->handler = new \PDO($dns, $this->db_user, $this->db_pass);
-        return $this->handler;
+        $dns = $this->db_type . ":dbname=" . $this->db_name . ";host=" . $this->db_host;
+        $dns .= ";port=" . $this->db_port;
+        try {
+            $this->handler = new \PDO($dns, $this->db_user, $this->db_pass);
+            return $this->handler;
+        } catch (\Exception $e) {
+            var_dump($dns);
+            throw $e;
+        };
     }
     
     public function disconnect() {

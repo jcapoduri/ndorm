@@ -1,5 +1,7 @@
 <?php
 
+namespace nd;
+
 class fieldDefinition {
     protected $defString;
 
@@ -11,7 +13,7 @@ class fieldDefinition {
     
     public function __construct($defstring) {
         $this->defString = $defstring;
-        $confparams = preg_split("/\ +/", trim($b));
+        $confparams = preg_split("/ +/", trim($this->defString));
         $len = count($confparams);
         for ($i = 0; $i < $len; $i++) {
         	$param = $confparams[$i];
@@ -43,7 +45,23 @@ class fieldDefinition {
         			$this->unique = true;
         			break;
         		default:
-        			throw new Exception("Error Processing Request", 1);
+        		    $subparam = preg_split("/:/", $param);
+        		    
+        		    if (count($subparam) == 1){
+        		        throw new Exception("Error Processing Request: " . $param, 1);
+        		    } 
+        		    
+        			switch ($subparam[0]) {
+        			    case 'link':
+    			        case 'set':
+    			        case 'list':
+    			        case 'tree':
+        			        $this->type = $subparam[0];
+        			        break;
+        			    default:
+        			        throw new Exception("Error Processing Request: " + $param, 1);
+        			        break;
+        			}
         			
         			break;
         	}

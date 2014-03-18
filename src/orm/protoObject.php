@@ -1,5 +1,7 @@
 <?php
 
+namespace nd;
+
 class protoObject {
     public function __construct() {}
     
