@@ -1,6 +1,6 @@
 <?php
 
-namespace Nd;
+namespace nd;
 
 class error extends \Exception {
     public function generateResponse() {

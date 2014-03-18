@@ -1,90 +1,31 @@
 {
-	"objects": [
-	    {
-    		"name" : "book",
-    		"nd_fields": true,
-    		"fields": [
-    		    {
-            		"name": "title",
-            		"unique": true,
-            		"isKey": true,
-            		"length": 128,
-            		"default": "",
-            		"type": "string"
-            	},
-            	{
-            		"name": "author",
-            		"isKey": true,
-            		"type": "object",
-            		"object_name": "author"
-            	}
-    		]
-    	},
-    	{
-    		"name" : "author",
-    		"nd_fields": false,
-    		"fields": [
-    		    {
-            		"name": "name",
-            		"length": 128,
-            		"default": "",
-            		"type": "string"
-            	},
-            	{
-            		"name": "lastname",
-            		"length": 128,
-            		"default": "",
-            		"type": "string"
-            	}
-    		]
-    	},
-    	{
-    		"name" : "user",
-    		"nd_fields": true,
-    		"inherits": "author",
-    		"fields": [
-    		    {
-            		"name": "email",
-            		"length": 128,
-            		"default": "",
-            		"type": "string"
-            	},
-            	{
-            		"name": "password",
-            		"length": 128,
-            		"default": "",
-            		"type": "string"
-            	}
-    		]
-    	}
-	],
-	"storages": [
-        {
-            "name": "local",
-    		"db_host": "127.7.201.1",
-    		"db_name": "c9",
-    		"db_user": "jcapoduri",
-    		"db_pass": "",
-    		"db_post": 3306,
-            "map": {
-                "user": "users",
-                "author": "authors",
-                "book": "books"
-            }
+    "objects": {
+        "author": {
+            "name": "string",
+            "lastname": "string",
+            "nickname": "string",
+            "age": "integer"
         },
-        {
-            "name": "sql_qa",
-            "db_host": "c2si.com.ar",
-            "db_name": "shaka_qa_blackfeather",
-            "db_user": "shaka",
-            "db_pass": "abcd1234",
-            "db_port": 3306
+        "comments": {
+            "comment": "string 4000",
+            "replys": "list:comments"
+        },
+        "post": {
+            "nd_attrs": "archivable",
+            "author": "link:author",
+            "title": "string",
+            "body": "string 40000",
+            "comments": "list: comments"
         }
-    ],
-	"apps": [
-	    {
-	        "name": "main",
-	        "storage": "sql_qa"
-	    }
-	]
+    },
+    "storages": {
+        "local": {         
+            "db_type": "mysql",
+            "db_host": "localhost",
+            "db_name": "test",
+            "db_user": "root",
+            "db_pass": "",
+            "db_port": 3061
+        }
+    }
 }

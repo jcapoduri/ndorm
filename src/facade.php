@@ -4,11 +4,13 @@ namespace nd;
 
 abstract class facade {
     abstract public function setup($json);
+    abstract public function init($name);
     
     /* global operations */
     abstract public function nuke();
     abstract public function updateSchema();
     abstract public function commit();
+    public function setAutocommit($value) { $this->autocommit = $value; }
     
     /* orm statemens*/
     abstract public function dispense($modelName);
@@ -21,7 +23,7 @@ abstract class facade {
     abstract public function findOne($modelName, $query, $dataArr);
     
     /* sql statements*/
-    abstract public function query($queryStr);
+    abstract public function query($queryStr, $params);
     
     protected $autocommit = false;
 }
