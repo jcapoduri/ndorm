@@ -2,8 +2,8 @@
 
 namespace nd;
 
-require 'fieldDefinition.php';
-require "protoObject.php";
+require_once 'fieldDefinition.php';
+require_once "protoObject.php";
 
 class modelDefinition {
     static public $models = array();

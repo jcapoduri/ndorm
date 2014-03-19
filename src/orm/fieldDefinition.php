@@ -70,6 +70,11 @@ class fieldDefinition {
         }
     }
 
+    public function getType() { return $this->type; }
+    public function getLength() { return $this->length; } 
+    public function isNullable() { return $this->nullable; } 
+    public function isIndex() { return $this->index; }
+    public function isUnique() { return $this->unique; }
 };
 
 ?>

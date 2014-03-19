@@ -36,11 +36,36 @@ class nd {
     }
     
     static public function updateSchema() {
-        
+        if (is_null(self::$PDOhandler)) return false;
+        $result = self::$PDOhandler->query("SHOW TABLES;");
+        while ($result as $row) {
+            
+        };
     }
 
     static public function updateModelScheme($name) {
     	$model = \nd\modelDefinition::model($name);
+    	if ( $model->isAbstract() ) return true; 
+    	
+    	//assert that the table exist
+    	$scheme = "CREATE TABLE IF NOT EXIST `" . $name . "`";
+    	if ($model->inheriteFrom()) {
+    	    $scheme .= " LIKE " . $model->inheriteFrom();
+    	} else {
+    	    $scheme .= "( id PRIMARY KEY INT UNSIGNED AUTO_INCREMENT NOT NULL) ENGINE innoDB;";
+    	};
+    	
+    	
+    	
+    	$fields = $model->getFields();
+    	foreach ($fields as $field) {
+    	    
+    	};
+    	
+    }
+    
+    static protected function fieldToScheme(\nd\fieldDefinition $field) {
+        
     }
 
     static public function commit() {
