@@ -25,7 +25,7 @@
             "db_name": "test",
             "db_user": "root",
             "db_pass": "",
-            "db_port": 3061
+            "db_port": 3306
         },
         "c9": {
             "db_type": "mysql",

@@ -11,9 +11,9 @@ $config_file = file_get_contents("config.json");
 $config_json = json_decode($config_file);
 //var_dump($config_json);
 nd::setup($config_json);
-nd::init("c9");
+nd::init("local");
 
-var_dump(\nd\modelDefinition);
+var_dump(\nd\modelDefinition::$models);
 
 ?>
 </code></pre>

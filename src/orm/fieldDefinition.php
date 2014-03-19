@@ -6,7 +6,7 @@ class fieldDefinition {
     protected $defString;
 
     protected $type = "string";
-    protected $length = 128;
+    protected $length = 0;
     protected $nullable = false;
     protected $index = false;
     protected $unique = false;
@@ -32,7 +32,9 @@ class fieldDefinition {
         			if (isset($confparams[$i + 1]) && is_numeric($confparams[$i + 1])){
         				$length = $confparams[$i + 1];
         				$i++;
-        			}
+        			} else {
+                        if ($param === "string") $this->length = 128;
+                    }
         			if ($param === "int") $this->type = "integer";
         			break;
         		case 'nullable':

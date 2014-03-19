@@ -3,9 +3,10 @@
 namespace nd;
 
 require 'fieldDefinition.php';
+require "protoObject.php";
 
 class modelDefinition {
-    static protected $models = array();
+    static public $models = array();
     
     static public function define($name, $defJson) {
         $realname = preg_split("/:/", trim($name));
@@ -52,6 +53,12 @@ class modelDefinition {
     }
 
     public function getFields() { return $this->fields; }
+
+    public function isAbstrct() { return $this->abstract; }
+    public function isStampable() { return $this->stampable; }
+    public function isArchivable() { return $this->archivable; }
+    public function isVersionable() { return $this->versionable; }
+    public function inheriteFrom() { return $this->inheritance; }
 };
 
 ?>

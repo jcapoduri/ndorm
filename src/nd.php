@@ -39,6 +39,10 @@ class nd {
         
     }
 
+    static public function updateModelScheme($name) {
+    	$model = \nd\modelDefinition::model($name);
+    }
+
     static public function commit() {
 
     }
